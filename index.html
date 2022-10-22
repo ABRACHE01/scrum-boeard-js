@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="utf-8" />
+	<title>YouCode | Scrum Board</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="assets/css/default/app.min.css" rel="stylesheet" />
+	<link href="assets/css/style.css" rel="stylesheet" />
+	<!-- ================== END core-css ================== -->
+</head>
+<body>
+
+	<!-- BEGIN #app -->
+	<div id="app" class="app-without-sidebar">
+		<!-- BEGIN #content -->
+		<div id="content" class="app-content main-style ">
+			<div class="navbar">
+				<div>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+						<li class="breadcrumb-item active">Scrum Board </li>
+					</ol>
+					<!-- BEGIN page-header -->
+					<h1 class="page-header">
+						Scrum Board 
+					</h1>
+					<!-- END page-header -->
+				</div>
+				
+				<div class="d-flex align-self-center">
+					<button  class="btn btn-info rounded-pill border-warning "  onclick="clear_menu();" data-bs-toggle="modal" data-bs-target="#modalform"><i class="fa fa-plus"></i> Add Task</button>
+				</div>
+			</div>
+			
+			<!-- Modal -->
+			<div class="modal fade"  id="modalform"  aria-labelledby="modalform" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<div class="modal-header bg-info text-white ">
+					<h1 class="modal-title fs-5" >Add Task</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body ">
+					<form id="form">
+						<div  class="mb-3">
+						  <label  class="col-form-label">Title:</label>
+						  <input type="texte" class="form-control" id="title">
+						</div>
+						
+						<div class="mb-3">
+							<h6>type:</h6>
+							<input class="type" type="radio" id="Feature" name="type" value="Feature"  >
+							<label>Feature</label>
+						     <br>
+							<input class="type" type="radio" id="Bug" name="type" value="bug" >
+							<label>bug</label>
+							</div>
+
+							
+							<div class="input-group mb-3">
+								<label class="input-group-text" for="Priority">Priority</label>
+								<select class="form-select" id="Priority">
+								  <option selected>Please select</option>
+								  <option value="Low">Low</option>
+								  <option value="Medium">Medium</option>
+								  <option value="Critical">Critical</option>
+								  <option value="High">High</option>
+								</select>
+							  </div>
+							  <div class="input-group mb-3">
+								<label class="input-group-text" for="Status">Status</label>
+								<select class="form-select" id="Status">
+								  <option selected>Please select</option>
+								  <option value="To Do">To Do</option>
+								  <option value="In Progress">in Progress</option>
+								  <option value="Done">Done</option>
+								</select>
+							</div>
+
+							<div>
+								<label for="date">date:</label>
+								<input class="form-control" type="date" id="date" name="date">
+							
+						</div>
+
+
+						<div class="mb-3">
+						  <label for="Description" class="col-form-label">Description:</label>
+						  <textarea class="form-control" id="Description"></textarea>
+						</div>
+					  </form>
+				</div>
+				<div class="modal-footer bg-info">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button id="submit" type="submit" class="btn btn-danger" onclick="delete_Tasks(id);" data-bs-dismiss="modal" >Delete</button>
+					<button id="submit" type="submit" class="btn btn-success" onclick="modifier();" data-bs-dismiss="modal" >update</button>
+					<button id="submit" type="submit" class="btn btn-primary" onclick="ajouterTasks();"  data-bs-dismiss="modal" >Save changes</button>
+				</div>
+				</div>
+			</div>
+			</div>
+               <!---end of modal-->
+			<div class="row">
+				<div class="col-sm-4 "> 
+					<div class=" pt-2 ">
+						<div class=" border bg-primary text-white rounded-top pt-2">
+							<h4 class="text-center">To do (<span id="to-do-tasks-count">0</span>)</h4>
+
+						</div>
+						<div class="" id="to-do-tasks">
+							<!-- TO DO TASKS HERE -->
+							
+							
+						
+					
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class=" pt-2">
+						<div class="border rounded-top bg-primary text-white pt-2">
+							<h4 class="text-center">In Progress (<span id="in-progress-tasks-count">0</span>)</h4>
+
+						</div>
+						<div class="" id="in-progress-tasks">
+							<!-- IN PROGRESS TASKS HERE -->
+							
+							
+					
+					
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class=" pt-2">
+						<div class="border rounded-top bg-primary text-white pt-2">
+							<h4 class="text-center ">Done (<span id="done-tasks-count">0</span>)</h4>
+
+						</div>
+						<div class=" " id="done-tasks"> 
+							<!-- DONE TASKS HERE --> 
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END #content -->
+		
+		
+		<!-- BEGIN scroll-top-btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
+		<!-- END scroll-top-btn -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- TASK MODAL -->
+	<div class="modal fade" id="modal-task">
+		<!-- Modal content goes here -->
+	</div>
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<script src="data.js"></script>
+	<script src="script.js"></script>
+	<!-- ================== END core-js ================== -->
+</body>
+</html>
