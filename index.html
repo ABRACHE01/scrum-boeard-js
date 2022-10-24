@@ -34,7 +34,7 @@
 				</div>
 				
 				<div class="d-flex align-self-center">
-					<button  class="btn btn-info rounded-pill border-warning "  onclick="clear_menu();" data-bs-toggle="modal" data-bs-target="#modalform"><i class="fa fa-plus"></i> Add Task</button>
+					<button  class="btn btn-info rounded-pill border-warning "  onclick="clear_menu(); hidebottun();" data-bs-toggle="modal" data-bs-target="#modalform"><i class="fa fa-plus"></i> Add Task</button>
 				</div>
 			</div>
 			
@@ -97,10 +97,10 @@
 					  </form>
 				</div>
 				<div class="modal-footer bg-info">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button id="submit" type="submit" class="btn btn-danger" onclick="delete_Tasks(id);" data-bs-dismiss="modal" >Delete</button>
-					<button id="submit" type="submit" class="btn btn-success" onclick="modifier();" data-bs-dismiss="modal" >update</button>
-					<button id="submit" type="submit" class="btn btn-primary" onclick="ajouterTasks();"  data-bs-dismiss="modal" >Save changes</button>
+				<!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button id="delete_button" type="submit" class="btn btn-danger" onclick="delete_Tasks(id);" data-bs-dismiss="modal" >Delete</button>
+				<button id="update_button" type="submit" class="btn btn-success" onclick="modifier();" data-bs-dismiss="modal" >update</button>
+				<button id="save_button" type="submit"   class="btn btn-primary" onclick="ajouterTasks();"  data-bs-dismiss="modal" >Save changes</button> -->
 				</div>
 				</div>
 			</div>

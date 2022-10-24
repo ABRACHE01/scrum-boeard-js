@@ -18,6 +18,10 @@ let donCount=document.getElementById("done-tasks-count");
 
 let form=document.getElementById("modalform");
 
+
+
+
+
 let idToUpdate;
 
 let trackId = 1;
@@ -28,12 +32,11 @@ function charger(){
     todoSection.innerHTML='';
     progressSection.innerHTML='';
     doneSection.innerHTML='';
-    
     var c;
 
     for (var i = 0; i < tasks.length; i++) {
       c=i+1;
-
+      
       if (tasks[i].status == "To Do") {
         todoSection.innerHTML+=`
         <button  onclick="getInfoToUpdate(id);"  id="${tasks[i].id}" class="container-fluid border  btn-light text-black   " data-bs-toggle="modal" data-bs-target="#modalform">
@@ -141,6 +144,13 @@ function ajouterTasks(){
 charger();
 
 function getInfoToUpdate(id) {
+
+  f=document.querySelector('.modal-footer');
+  f.innerHTML=`
+  <button id="delete_button" type="submit" class="btn btn-danger" onclick="delete_Tasks(id);" data-bs-dismiss="modal" >Delete</button>
+				<button id="update_button" type="submit" class="btn btn-success" onclick="modifier();" data-bs-dismiss="modal" >update</button>
+  `
+
   idToUpdate=id; 
   for(t of tasks){
     if (id==t.id){
@@ -186,14 +196,16 @@ function modifier(){
 
 function delete_Tasks(){
     temp = []
-    for(t of tasks){
-      if(t.id != idToUpdate){
+     for(t of tasks){
+     if(t.id != idToUpdate){
         temp.push(t);
       }else{
         continue;
       }
     }
     tasks = temp;
+  
+
     supTous();
     charger();
     deletalert();
@@ -222,6 +234,11 @@ function deletalert(){
     timer: 1500
   })
 }
-
+function hidebottun () {
+       f=document.querySelector('.modal-footer');
+     f.innerHTML=`
+     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button id="save_button" type="submit"   class="btn btn-primary" onclick="ajouterTasks();"  data-bs-dismiss="modal" >Save changes</button>    `
+}
 
 
